@@ -38,4 +38,12 @@ public class Item {
     private LocalDateTime regTime; //등록시간
 
     private LocalDateTime updateTime; //수정시간
+
+//    @ManyToMany
+//    @JoinTable(
+//            name="member_item"
+//            joinColums = @JoinColumn(name = "member_id"),
+//            inverseJoinColumns = @JoinColumn(name="item_id")
+//    )
+//    private List<Member> member;
 }
