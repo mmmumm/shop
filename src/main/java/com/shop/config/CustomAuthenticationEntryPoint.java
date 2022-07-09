@@ -18,7 +18,7 @@ public class CustomAuthenticationEntryPoint implements
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                     "Unauthorized");
         }else{
-            response.sendRedirect("/member/login");
+            response.sendRedirect("/members/login");
         }
     }
 }

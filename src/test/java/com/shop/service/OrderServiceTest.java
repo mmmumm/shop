@@ -64,6 +64,7 @@ class OrderServiceTest {
         orderDto.setItemId(item.getId());
 
         Long orderId = orderService.order(orderDto, member.getEmail());
+
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
 
