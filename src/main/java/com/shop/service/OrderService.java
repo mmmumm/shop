@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
-import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class OrderService {
 
     public Long order(OrderDto orderDto,String email){
         Item item =itemRepository.findById(orderDto.getItemId())
-                .orElseThrow(EntityExistsException::new);
+                .orElseThrow(EntityNotFoundException::new);
         Member member = memberRepository.findByEmail(email);
 
         List<OrderItem> orderItemList =new ArrayList<>();
@@ -71,7 +71,7 @@ public class OrderService {
     public boolean validateOrder(Long orderId,String email){
         Member curMember = memberRepository.findByEmail(email);
         Order order = orderRepository.findById(orderId)
-                .orElseThrow(EntityExistsException::new);
+                .orElseThrow(EntityNotFoundException::new);
         Member savedMember = order.getMember();
 
         if (!StringUtils.equals(curMember.getEmail(),savedMember.getEmail())){
@@ -81,7 +81,7 @@ public class OrderService {
     }
     public void cancelOrder(Long orderId){
         Order order = orderRepository.findById(orderId)
-                .orElseThrow(EntityExistsException::new);
+                .orElseThrow(EntityNotFoundException::new);
         order.cancelOrder();
     }
 }
